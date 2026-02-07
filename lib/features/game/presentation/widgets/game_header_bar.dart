@@ -21,8 +21,8 @@ class GameHeaderBar extends StatelessWidget {
         children: [
           // Back Button
           GlassContainer(
-            borderRadius: 12.r,
-            padding: EdgeInsets.all(8.r),
+            borderRadius: BorderRadius.circular(15.r),
+            padding: EdgeInsets.all(10.r),
             child: GestureDetector(
               onTap: () => context.pop(),
               child: Icon(

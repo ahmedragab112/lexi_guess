@@ -20,7 +20,7 @@ class GameTimer extends StatelessWidget {
     final timerColor = isUrgent ? AppColors.error : AppColors.primary;
 
     return GlassContainer(
-      borderRadius: 30.r,
+      borderRadius: BorderRadius.circular(30.r),
       borderColor: isUrgent ? AppColors.error : AppColors.glassBorder,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),

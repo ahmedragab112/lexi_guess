@@ -5,7 +5,7 @@ import '../theme/app_colors.dart';
 class GlassContainer extends StatelessWidget {
   final Widget child;
   final double blur;
-  final double borderRadius;
+  final BorderRadiusGeometry? borderRadius;
   final Color color;
   final Color borderColor;
   final EdgeInsetsGeometry? padding;
@@ -16,7 +16,7 @@ class GlassContainer extends StatelessWidget {
     super.key,
     required this.child,
     this.blur = 15,
-    this.borderRadius = 20,
+    this.borderRadius,
     this.color = AppColors.glassBase,
     this.borderColor = AppColors.glassBorder,
     this.padding,
@@ -26,8 +26,10 @@ class GlassContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final effectiveRadius = borderRadius ?? BorderRadius.circular(20);
+
     return ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius),
+      borderRadius: effectiveRadius,
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
         child: Container(
@@ -36,7 +38,7 @@ class GlassContainer extends StatelessWidget {
           padding: padding,
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(borderRadius),
+            borderRadius: effectiveRadius,
             border: Border.all(color: borderColor, width: 1.5),
           ),
           child: child,

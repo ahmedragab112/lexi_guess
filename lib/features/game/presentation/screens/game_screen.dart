@@ -54,6 +54,110 @@ class _GameScreenState extends State<GameScreen> {
       decoration: BoxDecoration(gradient: themeExt.scaffoldGradient),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        bottomNavigationBar: BlocBuilder<GameCubit, GameState>(
+          builder: (context, state) {
+            if (state.status == GameStatus.initial ||
+                state.status == GameStatus.loading) {
+              return const SizedBox.shrink();
+            }
+            return SafeArea(
+              child: GlassContainer(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.r),
+                  topRight: Radius.circular(30.r),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Clear Button
+                    GlassContainer(
+                      borderRadius: BorderRadius.circular(20.r),
+                      padding: EdgeInsets.all(12.r),
+                      child: GestureDetector(
+                        onTap: () {
+                          context.read<GameCubit>().clearInput();
+                        },
+                        child: Icon(
+                          Icons.refresh,
+                          color: Colors.white,
+                          size: 24.r,
+                        ),
+                      ),
+                    ),
+                    // Submit Button - GlassContainer style
+                    GlassContainer(
+                      borderRadius: BorderRadius.circular(25.r),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 35.w,
+                        vertical: 12.h,
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          context.read<GameCubit>().submitInput();
+                        },
+                        child: Text(
+                          'SUBMIT',
+                          style: AppTextStyles.h3.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Hint Button with Count
+                    Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        GlassContainer(
+                          borderRadius: BorderRadius.circular(20.r),
+                          padding: EdgeInsets.all(12.r),
+                          child: GestureDetector(
+                            onTap: () {
+                              context.read<GameCubit>().useHint();
+                            },
+                            child: Icon(
+                              Icons.lightbulb_outline,
+                              color: AppColors.accent,
+                              size: 24.r,
+                            ),
+                          ),
+                        ),
+                        if (state.hintsRemaining > 0)
+                          Positioned(
+                            top: -5,
+                            right: -5,
+                            child: Container(
+                              padding: EdgeInsets.all(4.r),
+                              decoration: const BoxDecoration(
+                                color: AppColors.error,
+                                shape: BoxShape.circle,
+                              ),
+                              constraints: BoxConstraints(
+                                minWidth: 18.r,
+                                minHeight: 18.r,
+                              ),
+                              child: Text(
+                                '${state.hintsRemaining}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
         body: BlocListener<GameCubit, GameState>(
           listenWhen: (previous, current) =>
               previous.status != current.status ||
@@ -261,74 +365,6 @@ class _GameScreenState extends State<GameScreen> {
                                   },
                                 ),
                               ),
-                              // Action Buttons Section - Directly Below Grid
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 30.w,
-                                  vertical: 20.h,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    // Clear Button
-                                    GlassContainer(
-                                      borderRadius: 20.r,
-                                      padding: EdgeInsets.all(16.r),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          context
-                                              .read<GameCubit>()
-                                              .clearInput();
-                                        },
-                                        child: Icon(
-                                          Icons.refresh,
-                                          color: Colors.white,
-                                          size: 28.r,
-                                        ),
-                                      ),
-                                    ),
-                                    // Submit Button - GlassContainer style
-                                    GlassContainer(
-                                      borderRadius: 25.r,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 35.w,
-                                        vertical: 14.h,
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          context
-                                              .read<GameCubit>()
-                                              .submitInput();
-                                        },
-                                        child: Text(
-                                          'SUBMIT',
-                                          style: AppTextStyles.h3.copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 1.5,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    // Hint Button
-                                    GlassContainer(
-                                      borderRadius: 20.r,
-                                      padding: EdgeInsets.all(16.r),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          context.read<GameCubit>().useHint();
-                                        },
-                                        child: Icon(
-                                          Icons.lightbulb_outline,
-                                          color: AppColors.accent,
-                                          size: 28.r,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -494,16 +530,11 @@ class _GameScreenState extends State<GameScreen> {
                         Navigator.of(dialogContext).pop();
                         context.read<GameCubit>().loadLevel(widget.levelId);
                       },
-                      child: Container(
+                      child: GlassContainer(
+                        borderRadius: BorderRadius.circular(25.r),
                         padding: EdgeInsets.symmetric(
                           horizontal: 20.w,
                           vertical: 12.h,
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [AppColors.primary, AppColors.secondary],
-                          ),
-                          borderRadius: BorderRadius.circular(25.r),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
