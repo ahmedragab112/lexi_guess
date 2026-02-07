@@ -58,7 +58,7 @@ class ResultScreen extends StatelessWidget {
                 ).animate().fadeIn(delay: 800.ms),
                 SizedBox(height: 30.h),
 
-                // Stats Grid
+                
                 GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -96,7 +96,7 @@ class ResultScreen extends StatelessWidget {
 
                 SizedBox(height: 30.h),
 
-                // Reviews Section
+                
                 const ResultReviewsSection().animate().fadeIn(
                   delay: 1.5.seconds,
                 ),

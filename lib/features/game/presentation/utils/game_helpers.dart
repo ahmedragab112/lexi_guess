@@ -1,6 +1,6 @@
-/// Helper utilities for game-related operations
+
 class GameHelpers {
-  /// Format seconds into MM:SS format
+  
   static String formatTime(int seconds) {
     if (seconds < 0) return '0:00';
     final minutes = seconds ~/ 60;
@@ -23,12 +23,12 @@ class GameHelpers {
     }
   }
 
-  /// Calculate score based on words found
+  
   static int calculateScore(int wordsFound) {
     return wordsFound * 100;
   }
 
-  /// Get feedback comment based on stars earned
+  
   static String getFeedbackComment(int stars) {
     if (stars == 5) return 'EXCELLENT!';
     if (stars == 4) return 'GREAT JOB!';

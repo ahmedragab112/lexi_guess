@@ -27,12 +27,12 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 60.h),
-                // Logo/Title Area
+                
                 const _HomeLogo().animate().fadeIn(duration: 800.ms).scale(),
 
                 const Spacer(),
 
-                // Options Area
+                
                 _HomeOption(
                   title: 'START ADVENTURE',
                   subtitle: 'Explore the map & solve puzzles',

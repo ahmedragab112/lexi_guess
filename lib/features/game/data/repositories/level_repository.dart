@@ -51,7 +51,7 @@ class LevelRepositoryImpl implements LevelRepository {
         );
       }).toList();
     } catch (e) {
-      // Fallback or rethrow
+      
       _cachedLevels = [];
     }
   }

@@ -38,7 +38,7 @@ class LevelMapHeader extends StatelessWidget {
                 ),
               ),
             ),
-            // Help/Info
+            
             CircleAvatar(
               backgroundColor: themeExt.glassBaseColor,
               child: Icon(Icons.info_outline, color: themeExt.textColor),

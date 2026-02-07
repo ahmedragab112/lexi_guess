@@ -19,7 +19,7 @@ class GameHeaderBar extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Row(
         children: [
-          // Back Button
+          
           GlassContainer(
             borderRadius: BorderRadius.circular(15.r),
             padding: EdgeInsets.all(10.r),
@@ -33,13 +33,13 @@ class GameHeaderBar extends StatelessWidget {
             ),
           ),
           SizedBox(width: 12.w),
-          // Level Label
+          
           Text(
             'LEVEL $levelId',
             style: AppTextStyles.h3.copyWith(color: Colors.white70),
           ),
           const Spacer(),
-          // Score Badge
+          
           BlocBuilder<GameCubit, GameState>(
             buildWhen: (previous, current) =>
                 previous.foundWords.length != current.foundWords.length,

@@ -6,6 +6,9 @@ import 'app_theme_extension.dart';
 class AppTheme {
   static ThemeData get lightTheme => ThemeData(
     useMaterial3: true,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+    ),
     brightness: Brightness.light,
     scaffoldBackgroundColor: const Color(0xFFF8FAFC),
     extensions: [AppThemeExtension.light],
@@ -39,6 +42,9 @@ class AppTheme {
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.background,
     extensions: [AppThemeExtension.dark],
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.surface,
+    ),
     colorScheme: const ColorScheme.dark(
       primary: AppColors.primary,
       secondary: AppColors.secondary,

@@ -8,7 +8,7 @@ abstract class MovieRepository {
 class MovieRepositoryImpl implements MovieRepository {
   @override
   Future<Movie> getDailyChallenge() async {
-    // Mocking for now as per architecture setup
+    
     await Future.delayed(const Duration(milliseconds: 800));
     return const Movie(
       id: '1',

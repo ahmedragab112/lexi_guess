@@ -33,7 +33,7 @@ class LetterGrid extends StatelessWidget {
         crossAxisCount: 4,
         crossAxisSpacing: 10.w,
         mainAxisSpacing: 10.h,
-        childAspectRatio: 1.15, // Wider than tall to save vertical space
+        childAspectRatio: 1.15, 
       ),
       itemCount: letters.length,
       itemBuilder: (context, index) {
@@ -60,7 +60,7 @@ class LetterGrid extends StatelessWidget {
               style: AppTextStyles.h2.copyWith(
                 color: isLight ? Colors.black : Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 22.sp, // Slightly smaller
+                fontSize: 22.sp, 
               ),
             ),
           ),

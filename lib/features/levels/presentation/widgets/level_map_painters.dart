@@ -10,14 +10,14 @@ class MapPathPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Base Paint (Locked/Gray paths)
+    
     final paint = Paint()
       ..color = Colors.white24
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4.w
       ..strokeCap = StrokeCap.round;
 
-    // Unlocked Paint (Colored paths)
+    
     final unlockedPaint = Paint()
       ..color = AppColors.accent
       ..style = PaintingStyle.stroke
@@ -30,11 +30,11 @@ class MapPathPainter extends CustomPainter {
       final p1 = positions[i];
       final p2 = positions[i + 1];
 
-      // Determine if this segment is unlocked
-      // Segment i connects node i+1 (level i+1) to node i+2 (level i+2)
-      // Actually, positions index 0 is Level 1.
-      // So segment 0 connects Level 1 and Level 2.
-      // It should be unlocked if Level 2 is unlocked (meaning we reached it).
+      
+      
+      
+      
+      
       final isUnlocked = (i + 2) <= latestUnlockedLevel;
 
       _drawDottedLine(
@@ -42,7 +42,7 @@ class MapPathPainter extends CustomPainter {
         p1,
         p2,
         isUnlocked ? unlockedPaint : paint,
-        // Increased dash width for better visibility
+        
         dashWidth: 10.w,
         dashSpace: 10.w,
       );
@@ -57,14 +57,14 @@ class MapPathPainter extends CustomPainter {
     double dashWidth = 10,
     double dashSpace = 5,
   }) {
-    // Node radius + padding to ensure line doesn't show behind node
+    
     final double maskRadius = 40.r;
 
     final double totalDistance = (p2 - p1).distance;
 
-    if (totalDistance <= maskRadius * 2) return; // Too close to draw anything
+    if (totalDistance <= maskRadius * 2) return; 
 
-    // Calculate effective start and end points (masked)
+    
     final Offset direction = (p2 - p1) / totalDistance;
     final Offset start = p1 + (direction * maskRadius);
     final Offset end = p2 - (direction * maskRadius);
@@ -78,7 +78,7 @@ class MapPathPainter extends CustomPainter {
       if (currentDistance + len > drawDistance) {
         len = drawDistance - currentDistance;
       }
-      // Calculate segment start/end
+      
       final segStart = start + (direction * currentDistance);
       final segEnd = start + (direction * (currentDistance + len));
 

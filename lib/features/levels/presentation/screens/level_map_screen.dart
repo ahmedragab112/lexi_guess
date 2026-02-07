@@ -27,7 +27,7 @@ class _LevelMapScreenState extends State<LevelMapScreen>
   final TransformationController _transformationController =
       TransformationController();
 
-  // These positions must match MapPathPainter's list
+  
   final List<Offset> _positions = [
     Offset(400.w, 1800.h),
     Offset(600.w, 1700.h),
@@ -68,7 +68,7 @@ class _LevelMapScreenState extends State<LevelMapScreen>
       ..translate(translation.dx, translation.dy)
       ..scale(zoom);
 
-    // Animate to position
+    
     final animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
@@ -89,27 +89,27 @@ class _LevelMapScreenState extends State<LevelMapScreen>
   }
 
   void _focusOnCurrentLevel(LevelsState state) {
-    // If we haven't successfully loaded yet, don't try to focus
+    
     if (state.status != LevelsStatus.loaded) return;
 
     final currentLevel = state.latestUnlockedLevel;
-    // index is 0-based, level is 1-based
-    // Ensure we handle potential range issues if levels > positions
+    
+    
     final targetIndex = (currentLevel - 1) % _positions.length;
 
-    // Direct set for initial load, animate otherwise?
-    // User requested "animate to the node", so let's use animation logic always or conditionally
-    // For initial load we might want instant or animated. Let's do animated for consistency
-    // if _hasFocused is true (manual tap), and maybe instant for initial?
-    // Actually, user said "tap on it aimate to the node", so manual is animated.
-    // For initial focus, usually instant is better to avoid motion sickness on load,
-    // but code below uses logic.
+    
+    
+    
+    
+    
+    
+    
 
-    // Let's us _focusOnPoint which I'll implement with animation for manual tap,
-    // but for initial setup we can just set it.
+    
+    
 
     if (!_hasFocused) {
-      // Initial set (Instant)
+      
       final targetPos = _positions[targetIndex];
       final double zoom = 1.0;
       final size = MediaQuery.of(context).size;
@@ -127,7 +127,7 @@ class _LevelMapScreenState extends State<LevelMapScreen>
         _hasFocused = true;
       });
     } else {
-      // Manual/Refocus (Animated)
+      
       _focusOnPoint(_positions[targetIndex]);
     }
   }
@@ -145,8 +145,8 @@ class _LevelMapScreenState extends State<LevelMapScreen>
               current.status == LevelsStatus.loaded,
           listener: (context, state) {
             if (state.status == LevelsStatus.loaded && !_hasFocused) {
-              // Add a slight delay just in case layout needs it, though strictly usually not if listener fires
-              // But user mentioned preferring listeners.
+              
+              
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 _focusOnCurrentLevel(state);
               });
@@ -199,7 +199,7 @@ class _LevelMapScreenState extends State<LevelMapScreen>
 
               return Stack(
                 children: [
-                  // Grid Pattern Background
+                  
                   Positioned.fill(
                     child: Opacity(
                       opacity: 0.1,
@@ -221,19 +221,19 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                       height: 2000.h,
                       child: Stack(
                         children: [
-                          // Connection Path
+                          
                           CustomPaint(
                             painter: MapPathPainter(
                               positions: _positions,
                               latestUnlockedLevel: state.latestUnlockedLevel,
                             ),
-                            size: Size(1200.w, 2000.h), // RESTORE SIZE
+                            size: Size(1200.w, 2000.h), 
                           ),
 
-                          // Level Nodes
+                          
                           ...List.generate(state.totalLevels, (index) {
                             final levelNumber = index + 1;
-                            // Ensure we use modulo for safety
+                            
                             final pos = _positions[index % _positions.length];
                             final progress = state.progress.firstWhere(
                               (p) => p.levelNumber == levelNumber,
@@ -270,10 +270,10 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                     ),
                   ),
 
-                  // Overlay Header
+                  
                   LevelMapHeader(unlocked: state.latestUnlockedLevel),
 
-                  // FAB to Recenter using GlassContainer
+                  
                   Positioned(
                     bottom: 20.h,
                     right: 20.w,

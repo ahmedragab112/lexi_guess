@@ -68,7 +68,7 @@ class GameCubit extends Cubit<GameState> {
     final puzzle = state.currentPuzzle;
     if (puzzle == null) return;
 
-    // Find first word not found
+    
     final unfound = puzzle.targetWords
         .where((word) => !state.foundWords.contains(word))
         .toList();
@@ -83,7 +83,7 @@ class GameCubit extends Cubit<GameState> {
         errorMessage: 'HINT: $hint',
       ),
     );
-    // Clear the message after a delay so it can be triggered again
+    
     Future.delayed(const Duration(seconds: 2), () {
       if (!isClosed) emit(state.copyWith(errorMessage: null));
     });
@@ -115,7 +115,7 @@ class GameCubit extends Cubit<GameState> {
       if (updatedFound.length == puzzle.targetWords.length) {
         _timer?.cancel();
 
-        // Calculate Stars using GameHelpers
+        
         final timeTaken = puzzle.timeLimitSeconds - state.timeLeft;
         final stars = GameHelpers.calculateStars(
           timeTaken,
@@ -149,7 +149,7 @@ class GameCubit extends Cubit<GameState> {
       }
     } else {
       emit(state.copyWith(currentInput: ''));
-      // Could add a "shake" effect here
+      
     }
   }
 

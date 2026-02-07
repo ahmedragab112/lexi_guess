@@ -94,7 +94,7 @@ class LevelMapNode extends StatelessWidget {
                         Icons.star_rounded,
                         color: isEarned
                             ? const Color(0xFFFACC15)
-                            : Colors.white.withOpacity(0.2), // Gold or Glass
+                            : Colors.white.withOpacity(0.2), 
                         size: 16.r,
                       )
                       .animate(delay: (index * 100).ms)

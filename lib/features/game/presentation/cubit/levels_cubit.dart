@@ -11,17 +11,17 @@ class LevelsCubit extends Cubit<LevelsState> {
     emit(state.copyWith(status: LevelsStatus.loading));
     try {
       final progress = await _repository.getAllProgress();
-      // We don't have a direct "getAllLevels" yet, so let's get a count
-      // by loading level 1 and checking how many we have in total
-      // Or just hardcode 14 for now based on the UI design.
-      // Actually, let's load level 1 to trigger the load and parse.
+      
+      
+      
+      
       await _repository.getLevel(1);
 
       emit(
         state.copyWith(
           status: LevelsStatus.loaded,
           progress: progress,
-          totalLevels: 14, // Hardcoded for this map design
+          totalLevels: 14, 
         ),
       );
     } catch (e) {

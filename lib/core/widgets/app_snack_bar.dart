@@ -4,8 +4,8 @@ import 'dart:ui';
 import 'package:lexi_guess/core/theme/app_colors.dart';
 import 'package:lexi_guess/core/theme/app_text_styles.dart';
 
-/// Custom SnackBar service for consistent app-wide notifications
-/// Uses glass morphism style matching the app's design system
+
+
 class AppSnackBar {
   static void show(
     BuildContext context, {
@@ -30,7 +30,7 @@ class AppSnackBar {
     overlay.insert(overlayEntry);
   }
 
-  /// Show success message
+  
   static void success(BuildContext context, String message, {IconData? icon}) {
     show(
       context,
@@ -40,7 +40,7 @@ class AppSnackBar {
     );
   }
 
-  /// Show error message
+  
   static void error(BuildContext context, String message, {IconData? icon}) {
     show(
       context,
@@ -50,7 +50,7 @@ class AppSnackBar {
     );
   }
 
-  /// Show hint message
+  
   static void hint(BuildContext context, String message, {IconData? icon}) {
     show(
       context,
@@ -60,7 +60,7 @@ class AppSnackBar {
     );
   }
 
-  /// Show info message
+  
   static void info(BuildContext context, String message, {IconData? icon}) {
     show(
       context,
@@ -70,7 +70,7 @@ class AppSnackBar {
     );
   }
 
-  /// Show warning message
+  
   static void warning(BuildContext context, String message, {IconData? icon}) {
     show(
       context,

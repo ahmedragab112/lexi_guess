@@ -53,7 +53,8 @@ class _GameScreenState extends State<GameScreen> {
     return Container(
       decoration: BoxDecoration(gradient: themeExt.scaffoldGradient),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.surface,
+        extendBody: true,
         bottomNavigationBar: BlocBuilder<GameCubit, GameState>(
           builder: (context, state) {
             if (state.status == GameStatus.initial ||
@@ -62,6 +63,11 @@ class _GameScreenState extends State<GameScreen> {
             }
             return SafeArea(
               child: GlassContainer(
+                color:
+                    Theme.of(
+                      context,
+                    ).bottomNavigationBarTheme.backgroundColor ??
+                    Colors.transparent,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.r),
                   topRight: Radius.circular(30.r),
@@ -70,7 +76,6 @@ class _GameScreenState extends State<GameScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Clear Button
                     GlassContainer(
                       borderRadius: BorderRadius.circular(20.r),
                       padding: EdgeInsets.all(12.r),
@@ -85,7 +90,7 @@ class _GameScreenState extends State<GameScreen> {
                         ),
                       ),
                     ),
-                    // Submit Button - GlassContainer style
+
                     GlassContainer(
                       borderRadius: BorderRadius.circular(25.r),
                       padding: EdgeInsets.symmetric(
@@ -107,7 +112,7 @@ class _GameScreenState extends State<GameScreen> {
                         ),
                       ),
                     ),
-                    // Hint Button with Count
+
                     Stack(
                       clipBehavior: Clip.none,
                       children: [
@@ -185,14 +190,12 @@ class _GameScreenState extends State<GameScreen> {
                 }
               });
             } else if (state.status == GameStatus.lost) {
-              // Show failed dialog
               _showFailedDialog(context, state);
             } else if (state.status == GameStatus.error &&
                 state.errorMessage != null) {
               AppSnackBar.error(context, state.errorMessage!);
             } else if (state.errorMessage != null &&
                 state.errorMessage!.startsWith('HINT:')) {
-              // Show hint message
               AppSnackBar.hint(
                 context,
                 state.errorMessage!.replaceFirst('HINT: ', ''),
@@ -213,7 +216,6 @@ class _GameScreenState extends State<GameScreen> {
                           ),
                           child: Column(
                             children: [
-                              // Header Section
                               Stack(
                                 alignment: Alignment.center,
                                 children: [
@@ -229,9 +231,6 @@ class _GameScreenState extends State<GameScreen> {
                                           ),
                                           Expanded(
                                             child: BlocBuilder<GameCubit, GameState>(
-                                              buildWhen: (previous, current) =>
-                                                  previous.foundWords !=
-                                                  current.foundWords,
                                               builder: (context, state) {
                                                 return Center(
                                                   child: SizedBox(
@@ -262,7 +261,7 @@ class _GameScreenState extends State<GameScreen> {
                                       ),
                                     ),
                                   ),
-                                  // Timer (Floating)
+
                                   Transform.translate(
                                     offset: Offset(0, 0.13.sh),
                                     child: BlocBuilder<GameCubit, GameState>(
@@ -279,7 +278,7 @@ class _GameScreenState extends State<GameScreen> {
                                 ],
                               ),
                               SizedBox(height: 50.h),
-                              // Grid Area Label
+
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                                 child: Row(
@@ -315,7 +314,7 @@ class _GameScreenState extends State<GameScreen> {
                                 ),
                               ),
                               SizedBox(height: 20.h),
-                              // Current Word Display - Always show
+
                               BlocBuilder<GameCubit, GameState>(
                                 buildWhen: (previous, current) =>
                                     previous.currentInput !=
@@ -327,7 +326,7 @@ class _GameScreenState extends State<GameScreen> {
                                 },
                               ),
                               SizedBox(height: 15.h),
-                              // Custom Grid
+
                               Container(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 20.w,
@@ -392,7 +391,6 @@ class _GameScreenState extends State<GameScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Confetti
                 ConfettiWidget(
                   confettiController: _confettiController,
                   blastDirectionality: BlastDirectionality.explosive,
@@ -493,7 +491,6 @@ class _GameScreenState extends State<GameScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Back to Levels
                     GestureDetector(
                       onTap: () {
                         Navigator.of(dialogContext).pop();
@@ -524,7 +521,7 @@ class _GameScreenState extends State<GameScreen> {
                         ),
                       ),
                     ).animate().fadeIn(delay: 700.ms).slideX(begin: -0.2),
-                    // Retry
+
                     GestureDetector(
                       onTap: () {
                         Navigator.of(dialogContext).pop();

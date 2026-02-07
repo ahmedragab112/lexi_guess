@@ -64,6 +64,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   }
 
   static const AppThemeExtension dark = AppThemeExtension(
+    
     scaffoldGradient: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -73,6 +74,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     glassBorderColor: Color(0x33FFFFFF),
     accentColor: Color(0xFF38BDF8),
     textColor: Colors.white,
+
     secondaryTextColor: Color(0xFF94A3B8),
   );
 
@@ -84,7 +86,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     ),
     glassBaseColor: Color(0x0D0F172A),
     glassBorderColor: Color(0x1A0F172A),
-    accentColor: Color(0xFF0369A1), // Slightly deeper blue for visibility
+    accentColor: Color(0xFF0369A1), 
     textColor: Color(0xFF0F172A),
     secondaryTextColor: Color(0xFF475569),
   );

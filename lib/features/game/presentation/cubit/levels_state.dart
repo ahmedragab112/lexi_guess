@@ -26,7 +26,7 @@ class LevelsState extends Equatable {
         .map((p) => p.levelNumber)
         .toList();
     if (completed.isEmpty) return 1;
-    // Find the max level number and add 1
+    
     int maxLevel = 0;
     for (var level in completed) {
       if (level > maxLevel) maxLevel = level;
